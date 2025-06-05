@@ -214,6 +214,7 @@ function displayRules(rules) {
     button.addEventListener("click", function () {
       const index = parseInt(this.dataset.index);
       deleteRule(index);
+      // get data-index value-string from button, convert to number, & pass to deleteRule()
     });
   });
 
@@ -347,23 +348,44 @@ function toggleAutoRemove(index) {
 }
 
 // Delete rule
+
 function deleteRule(index) {
-  chrome.storage.local.get([currentDomain], function (result) {
-    if (chrome.runtime.lastError) {
-      showStatus("Error accessing storage", "error");
-      return;
+  const rulesList = document.getElementById("rulesList");
+
+  const item = rulesList.children[index]; // Get the element to animate
+
+  if (!item) {
+    console.warn("No rule element found at index", index);
+    return;
+  }
+
+  // animate element
+  item.animate(
+    [
+      { opacity: 1, transform: "scale(1)" },
+      { opacity: 0, transform: "scale(0.95)" },
+    ],
+    {
+      duration: 250,
+      easing: "ease",
     }
-
-    const rules = result[currentDomain] || [];
-    rules.splice(index, 1);
-
-    chrome.storage.local.set({ [currentDomain]: rules }, function () {
+  ).onfinish = () => {
+    // Now update storage after animation
+    chrome.storage.local.get([currentDomain], function (result) {
       if (chrome.runtime.lastError) {
-        showStatus("Error deleting rule", "error");
-      } else {
-        showStatus("Rule deleted");
-        loadRules();
+        showStatus("Error accessing storage", "error");
+        return;
       }
+      const rules = result[currentDomain] || [];
+      rules.splice(index, 1);
+      chrome.storage.local.set({ [currentDomain]: rules }, function () {
+        if (chrome.runtime.lastError) {
+          showStatus("Error deleting rule", "error");
+        } else {
+          showStatus("Rule deleted");
+          loadRules(); // Triggers re-render after deletion
+        }
+      });
     });
-  });
+  };
 }
