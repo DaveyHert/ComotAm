@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "ComotAm - Element Remover",
+  "version": "1.0",
+  "description": "Remove specific elements from websites",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Element Remover"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end",
+      "css": ["style.css"]
+    }
+  ],
+  "icons": {
+    "128": "icon128.png",
+    "16": "icon16.png",
+    "48": "icon48.png"
+  }
+}
