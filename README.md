@@ -15,6 +15,8 @@ A powerful Chrome extension that allows you to remove specific unwanted elements
 - **Dark/Light theme**: Supports dark and light mode to fit individual preference
 - **User-Friendly Interface**: Easy-to-use interface and straightforward rule management
 
+  ![Extension Screenshot](./screenshot.png)
+
 ## Installation
 
 ### From Source
