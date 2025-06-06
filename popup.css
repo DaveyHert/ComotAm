@@ -72,7 +72,7 @@
     justify-content: space-between;
     padding-inline: 15px;
     position: relative;
-    user-select: none;
+    /* user-select: none; */
     box-shadow: inset 0 0 250px 160px #0f0f2d, 0 -6px 114px 10px #f6f6f605;
     overflow: hidden;
     z-index: 5;
@@ -96,8 +96,14 @@
       height: 100%;
       top: 0;
       left: 0;
-      z-index: 0;
+      z-index: 2;
       transform: scaleX(-1);
+      pointer-events: none;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 1;
     }
 
     /* theme toggle */
@@ -172,7 +178,7 @@
     border-radius: 4px;
     font-size: 14px;
     background-color: var(--content-bg);
-    transition: background-color 0.5s ease, border-color 0.5s;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
   }
 
   input::placeholder {
@@ -216,7 +222,7 @@
   }
 
   .btn.secondary {
-    background: #f8f9fa;
+    background: #fff;
     color: #3c4043;
     border: 1px solid #dadce0;
   }
@@ -235,12 +241,18 @@
   }
 
   .rules-list {
-    /* background: white; */
-    border-radius: 8px;
     margin-top: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     max-height: 200px;
     overflow-y: auto;
+    padding-top: 5px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #6366f1 #6365f13d;
+
+    &:has(:nth-child(4)) {
+      border-top: 1px dashed var(--border-color);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
   }
 
   .checkbox-label {
@@ -301,10 +313,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-
-  .rule-item:last-child {
-    border-bottom: none;
   }
 
   .rule-selector {
