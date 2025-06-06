@@ -2,11 +2,11 @@
   "manifest_version": 3,
   "name": "ComotAm - Element Remover",
   "version": "1.0",
-  "description": "Remove specific elements from websites",
+  "description": "Remove specific elements from the DOM or websites",
   "permissions": ["activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Element Remover"
+    "default_title": "ComotAm - Element Remover"
   },
   "content_scripts": [
     {
@@ -17,8 +17,9 @@
     }
   ],
   "icons": {
-    "128": "icon128.png",
     "16": "icon16.png",
-    "48": "icon48.png"
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   }
 }
