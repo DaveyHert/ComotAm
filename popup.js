@@ -18,17 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chrome.storage.local.set({ theme: currentTheme });
   });
 
-  // const savedTheme = localStorage.getItem("theme");
-  // if (savedTheme === "dark") {
-  //   body.classList.add("dark");
-  // }
-
-  // toggleBtn.addEventListener("click", () => {
-  //   body.classList.toggle("dark");
-  //   const currentTheme = body.classList.contains("dark") ? "dark" : "light";
-  //   localStorage.setItem("theme", currentTheme);
-  // });
-
   // Update selector label based on type
   document
     .getElementById("selectorType")
@@ -52,7 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         case "custom":
           label.textContent = "CSS Selector:";
-          input.placeholder = "Enter custom CSS selector";
+          input.placeholder =
+            "Enter custom CSS selector (e.g., iframe[id='video'])";
           break;
       }
     });
