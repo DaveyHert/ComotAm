@@ -8,17 +8,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
 
   // Load saved theme
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    body.classList.add("dark");
-  }
-
+  chrome.storage.local.get(["theme"], ({ theme }) => {
+    if (theme === "dark") body.classList.add("dark");
+  });
   //   toggle dark/light mode
   toggleBtn.addEventListener("click", () => {
     body.classList.toggle("dark");
     const currentTheme = body.classList.contains("dark") ? "dark" : "light";
-    localStorage.setItem("theme", currentTheme);
+    chrome.storage.local.set({ theme: currentTheme });
   });
+
+  // const savedTheme = localStorage.getItem("theme");
+  // if (savedTheme === "dark") {
+  //   body.classList.add("dark");
+  // }
+
+  // toggleBtn.addEventListener("click", () => {
+  //   body.classList.toggle("dark");
+  //   const currentTheme = body.classList.contains("dark") ? "dark" : "light";
+  //   localStorage.setItem("theme", currentTheme);
+  // });
 
   // Update selector label based on type
   document
@@ -78,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
           return;
         }
 
-        rules.push({ selector, type, autoRemove });
+        rules.unshift({ selector, type, autoRemove });
 
         chrome.storage.local.set({ [currentDomain]: rules }, function () {
           if (chrome.runtime.lastError) {
